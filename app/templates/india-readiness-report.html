@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>India HR Readiness Report — OBOX HR</title>
+<style>
+@page { size: A4; margin: 0; }
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #e8edf7;
+  font-family: 'Jost', Arial, Helvetica, sans-serif;
+  color: #0c1b3a;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+:root {
+  --blue: #1056F5;
+  --blue-dark: #0A3CC7;
+  --blue-soft: #EEF3FF;
+  --teal: #00C9A0;
+  --amber: #F5A623;
+  --amber-soft: #FFF8EC;
+  --red: #E03434;
+  --red-soft: #FEF0F0;
+  --green: #18A054;
+  --green-soft: #EDFBF4;
+  --ink: #0C1B3A;
+  --ink-2: #243354;
+  --muted: #6B7A99;
+  --border: #DDE4F0;
+  --surface: #F7F9FE;
+  --white: #FFFFFF;
+}
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+  page-break-after: always;
+}
+.page:last-child { page-break-after: auto; }
+
+.page-inner {
+  padding: 16mm 10mm 12mm;
+  height: 100%;
+  position: relative;
+}
+
+.header-row,
+.footer-row {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.header-row td,
+.footer-row td { padding: 0; vertical-align: middle; }
+
+.page-header {
+  margin-bottom: 10px;
+}
+.page-header .left img { height: 22px; display: block; }
+.page-header .right {
+  text-align: right;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+.page-footer {
+  position: absolute;
+  left: 10mm;
+  right: 10mm;
+  bottom: 8mm;
+  border-top: 1px solid var(--border);
+  padding-top: 6px;
+}
+.page-footer .left,
+.page-footer .right {
+  font-size: 10px;
+  color: var(--muted);
+}
+.page-footer .right { text-align: right; font-weight: 600; }
+
+.cover-header {
+  background: linear-gradient(135deg, #069af3, #1660f3);
+  border-radius: 18px 18px 0 0;
+  padding: 18px 22px 22px;
+  position: relative;
+  overflow: hidden;
+}
+.cover-header:before,
+.about-hero:before {
+  content: '';
+  position: absolute;
+  right: -70px;
+  top: -70px;
+  width: 220px;
+  height: 220px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 50%;
+}
+.cover-divider {
+  height: 22px;
+  background: #fff;
+  clip-path: polygon(0 100%, 100% 0, 100% 100%);
+}
+
+.brand-table,
+.top-zone-table,
+.profile-table,
+.steps-table,
+.stats-table,
+.services-table,
+.why-table,
+.contact-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.brand-table { border-spacing: 0; }
+.brand-table td { vertical-align: middle; }
+.brand-table .right { text-align: right; }
+.report-tag {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.88);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+.cover-logo { height: 26px; display: block; }
+.cover-kicker {
+  margin-top: 18px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #fff;
+}
+.cover-title {
+  margin-top: 8px;
+  font-size: 29px;
+  line-height: 1.16;
+  font-weight: 700;
+  color: #fff;
+}
+.cover-meta-row {
+  margin-top: 16px;
+}
+.cover-pill {
+  display: inline-block;
+  margin: 0 6px 6px 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.9);
+  font-size: 12px;
+}
+
+.top-zone-table { margin-top: 14px; }
+.top-zone-table td { vertical-align: top; }
+.top-zone-table .left-col { width: 75%; padding-right: 6px; }
+.top-zone-table .right-col { width: 25%; padding-left: 6px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #069af3;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+	padding-top: 20px;
+}
+
+.profile-table { margin-top: 2px; }
+.profile-table td { padding: 6px 10px 0 0; vertical-align: top; width: 50%; }
+.profile-table td:nth-child(2) { padding-right: 0; padding-left: 10px; }
+.pfield-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+.pfield-value {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.score-card {
+  min-height: 158px;
+  background: linear-gradient(180deg, #f7faff 0%, #eef4ff 100%);
+  border: 1px solid #d7e4ff;
+  border-radius: 16px;
+  padding: 14px;
+}
+.score-card-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #069af3;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  margin-bottom: 12px;
+}
+.score-box {
+  background: #fff;
+  border: 1px solid #dbe6fb;
+  border-radius: 14px;
+  padding: 12px 12px 10px;
+  margin-bottom: 10px;
+}
+.score-num { font-size: 30px; font-weight: 800; color: var(--blue-dark); line-height: 0.95; }
+.score-denom { font-size: 14px; font-weight: 700; color: var(--muted); margin-top: 2px; }
+.score-meter {
+  height: 8px;
+  background: #dbe6fb;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.score-meter-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #069af3 0%, #1660f3 100%);
+}
+.score-status {
+  background: #fff;
+  border: 1px solid #dbe6fb;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink-2);
+}
+
+.bars-section,
+.chips-section,
+.risk-section,
+.steps-section,
+.about-section,
+.why-section { margin-top: 12px; }
+
+.bars-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.bars-table td { width: 50%; vertical-align: top; padding: 0 8px 10px 0; }
+.bars-table td:nth-child(2) { padding-left: 8px; padding-right: 0; }
+.bar-head { margin-bottom: 4px; font-size: 12px; font-weight: 600; color: var(--ink-2); }
+.bar-head .pct { float: right; font-weight: 800; }
+.bar-track { height: 7px; background: var(--border); border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 999px; }
+.fill-strong { background: linear-gradient(90deg, var(--green), #4AD991); }
+.fill-mid { background: linear-gradient(90deg, var(--amber), #F9C74F); }
+.fill-weak { background: linear-gradient(90deg, var(--red), #F87171); }
+
+.chip-list,
+.risk-list {
+  font-size: 0;
+}
+.chip,
+.risk-item {
+  display: inline-block;
+  margin: 0 8px 8px 0;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  vertical-align: top;
+}
+.chip-warn { background: var(--amber-soft); color: #92400e; box-shadow: inset 0 0 0 1px #fde68a; }
+.chip-ok { background: var(--green-soft); color: #14532d; box-shadow: inset 0 0 0 1px #bbf7d0; }
+.risk-item { background: var(--red-soft); color: #7f1d1d; box-shadow: inset 0 0 0 1px #fca5a5; }
+
+.steps-table { margin-top: 12px; }
+.steps-table td { width: 33.333%; vertical-align: top; padding-right: 10px; }
+.steps-table td:last-child { padding-right: 0; }
+.step-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px;
+  min-height: 170px;
+  background: #fff;
+}
+.step-num {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--blue); color: #fff; font-size: 10px; font-weight: 800;
+  text-align: center; line-height: 24px; margin-bottom: 10px;
+}
+.step-title { font-size: 14px; font-weight: 700; line-height: 1.35; margin-bottom: 6px; }
+.step-desc { font-size: 12px; line-height: 1.45; color: var(--muted); }
+
+.cta-block {
+  margin-top: 16px;
+  background: linear-gradient(135deg, #069af3, #1660f3);
+  border-radius: 16px;
+  padding: 16px 18px;
+}
+.cta-inner {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.cta-inner td { vertical-align: middle; }
+.cta-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.cta-text { font-size: 12px; color: rgba(255,255,255,0.88); line-height: 1.45; }
+.cta-inner .right { text-align: right; width: 220px; }
+.cta-btn {
+  display: inline-block;
+  padding: 11px 18px;
+  border-radius: 10px;
+  background: #fff;
+  color: #1660f3;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.about-hero {
+  background: linear-gradient(135deg, #069af3, #1660f3);
+  border-radius: 18px;
+  padding: 20px 22px;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+.about-white-logo { height: 22px; display: block; margin-bottom: 14px; }
+.about-kicker { font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 8px; }
+.about-title { font-size: 24px; font-weight: 700; line-height: 1.16; margin-bottom: 8px; }
+.about-tagline { font-size: 12px; line-height: 1.45; color: rgba(255,255,255,0.9); }
+
+.stats-table { margin-top: 12px; }
+.stats-table td { width: 25%; vertical-align: top; padding-right: 10px; }
+.stats-table td:last-child { padding-right: 0; }
+.stat-box {
+  background: linear-gradient(145deg, #f0f5ff, #e8eeff);
+  border: 1px solid #d0dcff;
+  border-radius: 12px;
+  text-align: center;
+  padding: 12px 6px;
+  min-height: 74px;
+}
+.stat-num { font-size: 20px; font-weight: 800; color: #0990f3; line-height: 1; margin-bottom: 4px; }
+.stat-lbl { font-size: 11px; color: var(--muted); line-height: 1.25; }
+
+.about-intro {
+  background: var(--surface);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 12px 12px 0;
+  padding: 12px 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.services-table { margin-top: 10px; }
+.services-table td { width: 50%; vertical-align: top; padding: 0 10px 10px 0; }
+.services-table td:nth-child(2) { padding-right: 0; padding-left: 10px; }
+.service-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #fff;
+  padding: 12px;
+  min-height: 84px;
+}
+.service-icon-row { margin-bottom: 8px; }
+.service-icon {
+  display: inline-block;
+  min-width: 30px;
+  padding: 6px 10px;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 800;
+  margin-right: 8px;
+  vertical-align: top;
+}
+.service-name {
+  display: inline-block;
+  width: calc(100% - 44px);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  vertical-align: top;
+}
+.service-desc {
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--muted);
+  margin-left: 10px;
+}
+
+.why-table { margin-top: 10px; }
+.why-table td { width: 50%; vertical-align: top; padding: 0 10px 10px 0; }
+.why-table td:nth-child(2) { padding-right: 0; padding-left: 10px; }
+.why-item {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  padding: 12px 12px 10px;
+  text-align: center;
+  min-height: 132px;
+}
+.why-emoji {
+  display: inline-block;
+  min-width: 32px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.why-title { font-size: 13px; font-weight: 700; line-height: 1.32; margin-bottom: 5px; }
+.why-desc { font-size: 11px; line-height: 1.4; color: var(--muted); }
+
+.contact-band {
+  margin-top: 12px;
+  background: var(--blue);
+  border-radius: 16px;
+  padding: 16px 18px;
+  color: #fff;
+}
+.contact-table td { vertical-align: top; }
+.contact-table .left { width: 58%; }
+.contact-table .right { width: 42%; }
+.contact-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.contact-sub { font-size: 12px; color: rgba(255,255,255,0.9); }
+.contact-link { font-size: 12px; font-weight: 600; color: #fff; line-height: 1.6; }
+.contact-link a { color: #fff; text-decoration: none; }
+
+.disclaimer {
+  margin-top: 10px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.page-1 .page-inner { padding-top: 10mm; }
+.page-2 .page-inner,
+.page-3 .page-inner,
+.page-4 .page-inner,
+.page-5 .page-inner { padding-top: 10mm; }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page page-1">
+  <div class="page-inner">
+    <div class="cover-header">
+      <table class="brand-table">
+        <tr>
+          <td><img class="cover-logo" src="https://oboxhr.com/assets/images/Obox_white_logo.png" alt="OBOX HR"></td>
+          <td class="right"><span class="report-tag">Confidential Report</span></td>
+        </tr>
+      </table>
+
+      <div class="cover-kicker">India HR Readiness Assessment</div>
+      <div class="cover-title">Your India Expansion Readiness Summary</div>
+      <div class="cover-meta-row">
+        <span class="cover-pill">Generated {{ generated_at }}</span>
+      </div>
+    </div>
+    <div class="cover-divider"></div>
+
+    <table class="top-zone-table">
+      <tr>
+        <td class="left-col">
+          <div class="card">
+            <div class="section-title" style="margin-bottom:8px;">Your Readiness Profile</div>
+            <table class="profile-table">
+              <tr>
+                <td>
+                  <span class="pfield-label">Name</span>
+                  <span class="pfield-value">{{ lead.name }}</span>
+                </td>
+                <td>
+                  <span class="pfield-label">Company</span>
+                  <span class="pfield-value">{{ lead.company }}</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="pfield-label">Work Email</span>
+                  <span class="pfield-value">{{ lead.email }}</span>
+                </td>
+                <td>
+                  <span class="pfield-label">Expansion Stage</span>
+                  <span class="pfield-value">{{ lead.expansion_stage }}</span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </td>
+        <td class="right-col">
+          <div class="score-card">
+            <div class="score-card-label">Overall Readiness</div>
+            <div class="score-box">
+              <div class="score-num">{{ scores.overall }}</div>
+              <div class="score-denom">/100</div>
+            </div>
+            <div class="score-meter"><div class="score-meter-fill" style="width:{{ scores.overall }}%;"></div></div>
+            <div class="score-status">{{ scores.status_text }}</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <div class="bars-section">
+      <div class="section-title">Section Analytics</div>
+      <table class="bars-table">
+        <tr>
+          {% for s in scores.sections %}
+            {% if loop.index0 is divisibleby 2 and not loop.first %}</tr><tr>{% endif %}
+            <td>
+              <div class="bar-head">
+                <span>{{ s.label }}</span>
+                <span class="pct" style="color:{% if s.percent >= 70 %}var(--green){% elif s.percent >= 45 %}var(--amber){% else %}var(--red){% endif %};">{{ s.percent }}%</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill {% if s.percent >= 70 %}fill-strong{% elif s.percent >= 45 %}fill-mid{% else %}fill-weak{% endif %}" style="width:{{ s.percent }}%;"></div>
+              </div>
+            </td>
+          {% endfor %}
+        </tr>
+      </table>
+    </div>
+
+    <div class="chips-section">
+      <div class="section-title">What Needs Attention</div>
+      <div class="chip-list">
+        {% if scores.weak_sections and scores.weak_sections|length > 0 %}
+          {% for ws in scores.weak_sections %}
+            <span class="chip chip-warn">{{ ws }}</span>
+          {% endfor %}
+        {% else %}
+          <span class="chip chip-ok">No critical gaps detected</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <table class="footer-row">
+        <tr>
+          <td class="left">India HR Readiness Report 2026 - {{ lead.company }}</td>
+          <td class="right">Page 1 of 4</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page page-2">
+  <div class="page-inner">
+    <div class="page-header">
+      <table class="header-row">
+        <tr>
+          <td class="left"><img src="{{ logo_path }}" alt="OBOX HR"></td>
+          <td class="right">Confidential Report</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="risk-section">
+      <div class="section-title">Risk Areas</div>
+      <div class="risk-list">
+        {% if scores.risk_areas and scores.risk_areas|length > 0 %}
+          {% for r in scores.risk_areas %}
+            <span class="risk-item">{{ r }}</span>
+          {% endfor %}
+        {% else %}
+          <span class="chip chip-ok">No critical risk areas detected based on current responses.</span>
+        {% endif %}
+      </div>
+    </div>
+
+	  <div class="steps-section">
+      <div class="section-title">Recommended Next Steps</div>
+      <table class="steps-table">
+        <tr>
+          <td>
+            <div class="step-card">
+              <div class="step-num">1</div>
+              <div class="step-title">Review Your Results with an Expert</div>
+              <div class="step-desc">Book a free 30-minute consultation to understand your score, pressure points, and the actions that matter most for your current stage.</div>
+            </div>
+          </td>
+          <td>
+            <div class="step-card">
+              <div class="step-num">2</div>
+              <div class="step-title">Address the Gaps Early</div>
+              <div class="step-desc">Prioritise the weak areas identified in your report before they begin to slow down day-to-day operations.</div>
+            </div>
+          </td>
+          <td>
+            <div class="step-card">
+              <div class="step-num">3</div>
+              <div class="step-title">Define the Right India Setup</div>
+              <div class="step-desc">Choose the structure, operating model, and level of control that fit your current stage. OBOX guides you through the right path to reach your goals.</div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="cta-block">
+      <table class="cta-inner">
+        <tr>
+          <td>
+            <div class="cta-title">Need clarity on India setup, compliance, or expansion?</div>
+            <div class="cta-text">Connect with an OBOX expert for a complimentary 30-minute discussion, no obligation.</div>
+          </td>
+          <td class="right">
+            <a href="https://oboxhr.com/booking_page" class="cta-btn">Book a Call with OBOX Expert</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+	  
+    <div class="page-footer">
+      <table class="footer-row">
+        <tr>
+          <td class="left">India HR Readiness Report 2026 - {{ lead.company }}</td>
+          <td class="right">Page 2 of 4</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- PAGE 4 -->
+<div class="page page-4">
+  <div class="page-inner">
+    <div class="page-header">
+      <table class="header-row">
+        <tr>
+          <td class="left"><img src="{{ logo_path }}" alt="OBOX HR"></td>
+          <td class="right">Confidential Report</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="about-hero">
+      <img class="about-white-logo" src="https://oboxhr.com/assets/images/Obox_white_logo.png" alt="OBOX HR">
+      <div class="about-kicker">About OBOX HR</div>
+      <div class="about-title">India's Leading Business Expansion Specialist</div>
+      <div class="about-tagline">Combining global perspective with deep local expertise - your trusted partner from day one in India.</div>
+    </div>
+
+    <table class="stats-table">
+      <tr>
+        <td><div class="stat-box"><div class="stat-num">15+</div><div class="stat-lbl">Years of India Experience</div></div></td>
+        <td><div class="stat-box"><div class="stat-num">450+</div><div class="stat-lbl">Companies Supported</div></div></td>
+        <td><div class="stat-box"><div class="stat-num">23+</div><div class="stat-lbl">Countries Served</div></div></td>
+        <td><div class="stat-box"><div class="stat-num">220+</div><div class="stat-lbl">Professionals</div></div></td>
+      </tr>
+    </table>
+
+    <div class="about-section">
+      <div class="section-title">Who We Are</div>
+      <div class="about-intro">OBOX is a one-stop India partner for global companies helping them set up, stay compliant, and scale with confidence. Since 2011, we have delivered integrated support across entity setup, accounting &amp; taxation, finance, payroll, compliance, recruitment, and GCC / operational support, enabling businesses to manage India through one accountable partner instead of multiple disconnected vendors.</div>
+    </div>
+
+    <div class="about-section">
+      <div class="section-title">Our Services</div>
+      <table class="services-table">
+        <tr>
+          <td>
+            <div class="service-card">
+              <div class="service-icon-row"><span class="service-icon">1. Employer of Record (EOR)</span></div>
+              <div class="service-desc">Hire and manage employees compliantly in India without setting up a local entity</div>
+            </div>
+          </td>
+          <td>
+            <div class="service-card">
+              <div class="service-icon-row"><span class="service-icon">2. Entity Setup &amp; Compliance Management</span></div>
+              <div class="service-desc">End-to-end support across incorporation, registrations, accounting, taxation, finance and statutory compliance.</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="service-card">
+              <div class="service-icon-row"><span class="service-icon">3. Recruitment &amp; Talent Acquisition</span></div>
+              <div class="service-desc">Hiring support across technology, finance, operations, and business support functions.</div>
+            </div>
+          </td>
+          <td>
+            <div class="service-card">
+              <div class="service-icon-row"><span class="service-icon">4. Payroll, Benefits &amp; HR Administration</span></div>
+              <div class="service-desc">End-to-end payroll processing, benefits administration, statutory deductions, and HR operations support</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="service-card">
+              <div class="service-icon-row"><span class="service-icon">5. HR Advisory, Compliance &amp; Virtual HR</span></div>
+              <div class="service-desc">Policy design, contracts, employee handbook, HR compliance, audits, employee relations, and ongoing virtual HR support.</div>
+            </div>
+          </td>
+          <td>
+            <div class="service-card">
+              <div class="service-icon-row"><span class="service-icon">6. Global Capability Centre (GCC)</span></div>
+              <div class="service-desc">Build, operate, and scale dedicated teams and delivery centres for long-term India presence.</div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="page-footer">
+      <table class="footer-row">
+        <tr>
+          <td class="left">India HR Readiness Report 2026 - {{ lead.company }}</td>
+          <td class="right">Page 3 of 4</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page page-5">
+  <div class="page-inner">
+    <div class="page-header">
+      <table class="header-row">
+        <tr>
+          <td class="left"><img src="{{ logo_path }}" alt="OBOX HR"></td>
+          <td class="right">Confidential Report</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="why-section">
+      <div class="section-title">Why Companies Choose OBOX</div>
+      <table class="why-table">
+        <tr>
+          <td>
+            <div class="why-item">
+              <div class="why-emoji">1</div>
+              <div class="why-title">One Partner Across the India Journey</div>
+              <div class="why-desc">From first-market entry to ongoing operations, OBOX helps businesses move forward with more clarity and less fragmentation.</div>
+            </div>
+          </td>
+          <td>
+            <div class="why-item">
+              <div class="why-emoji">2</div>
+              <div class="why-title">Built for Every Stage of Growth</div>
+              <div class="why-desc">Whether you are planning India entry, setting up a new subsidiary, or strengthening an existing one, support is aligned to your current stage.</div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="why-item">
+              <div class="why-emoji">3</div>
+              <div class="why-title">Global-Local Expertise</div>
+              <div class="why-desc">Practical understanding of India's regulatory and operational environment helps businesses make decisions that are workable on the ground.</div>
+            </div>
+          </td>
+          <td>
+            <div class="why-item">
+              <div class="why-emoji">4</div>
+              <div class="why-title">Structured Support That Scales</div>
+              <div class="why-desc">As teams, complexity, and operational needs grow, OBOX helps keep execution consistent, compliant, and easier to manage.</div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    
+	  <div class="cta-block">
+      <table class="cta-inner">
+        <tr>
+          <td>
+            <div class="cta-title">Need a clearer path forward in India?</div>
+            <div class="cta-text">Speak with an OBOX Expert - Free 30-minute discussion</div>
+          </td>
+          <td class="right">
+            <a href="https://oboxhr.com/booking_page" class="cta-btn">Book a Call with OBOX Expert</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="disclaimer">This report is generated from your self-assessment responses and is intended as an indicative guide only. It does not constitute legal, tax, or regulatory advice. OBOX HR recommends consulting a qualified advisor before making business decisions.</div>
+
+    <div class="page-footer">
+      <table class="footer-row">
+        <tr>
+          <td class="left">India HR Readiness Report 2026 - {{ lead.company }}</td>
+          <td class="right">Page 4 of 4</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
