@@ -1,49 +1,22 @@
 """
-Email service — sends the PDF report to the lead via SMTP.
-Sender is always EMAIL_FROM (fixed).
-Recipient is leadData.email.
+Email service — sends the report email to the lead via Resend.
 """
 import logging
 import os
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+
+import resend
 
 logger = logging.getLogger(__name__)
 
 
-def _env(key: str, default: str = "") -> str:
-    return os.getenv(key, default)
-
-
 def send_report_email(recipient_email: str, first_name: str, full_name: str, pdf_url: str) -> None:
-    """
-    Send the readiness PDF report to the lead as a tracked download link.
-    Clicking the link records 'PDF Opened At' in Google Sheets.
-    All SMTP config comes from env vars.
-    """
-    smtp_host = _env("SMTP_HOST", "smtp.gmail.com")
-    smtp_port = int(_env("SMTP_PORT", "587"))
-    smtp_user = _env("SMTP_USER")
-    smtp_password = _env("SMTP_PASSWORD")
-    use_tls = _env("SMTP_USE_TLS", "true").lower() in ("true", "1", "yes")
-    email_from = _env("EMAIL_FROM")
-    from_name = _env("EMAIL_FROM_NAME", "OBOX HR")
+    resend.api_key = os.getenv("RESEND_API_KEY", "")
+    if not resend.api_key:
+        raise RuntimeError("RESEND_API_KEY env var not set")
 
-    if not email_from:
-        raise RuntimeError("EMAIL_FROM env var not set")
-    if not smtp_user or not smtp_password:
-        raise RuntimeError("SMTP_USER / SMTP_PASSWORD env vars not set")
+    email_from = os.getenv("EMAIL_FROM", "automation@oboxhr.com")
+    from_name  = os.getenv("EMAIL_FROM_NAME", "OBOX HR")
 
-    sender = f"{from_name} <{email_from}>"
-
-    # Build message
-    msg = MIMEMultipart("mixed")
-    msg["From"] = sender
-    msg["To"] = recipient_email
-    msg["Subject"] = f"{first_name}, Your India HR Readiness Report"
-
-    # Body — download link replaces the attachment so opens can be tracked
     body_html = f"""
     <html><body>
       <p>Hi {first_name},</p>
@@ -63,20 +36,12 @@ def send_report_email(recipient_email: str, first_name: str, full_name: str, pdf
       <p>Warm regards,<br/><strong>OBOX HR Team</strong></p>
     </body></html>
     """
-    msg.attach(MIMEText(body_html, "html"))
 
-    # Send
-    if use_tls:
-        with smtplib.SMTP(smtp_host, smtp_port) as server:
-            server.ehlo()
-            server.starttls()
-            server.login(smtp_user, smtp_password)
-            server.sendmail(email_from, recipient_email, msg.as_string())
-    else:
-        with smtplib.SMTP_SSL(smtp_host, smtp_port) as server:
-            server.login(smtp_user, smtp_password)
-            server.sendmail(email_from, recipient_email, msg.as_string())
+    resend.Emails.send({
+        "from": f"{from_name} <{email_from}>",
+        "to": [recipient_email],
+        "subject": f"{first_name}, Your India HR Readiness Report",
+        "html": body_html,
+    })
 
-    logger.info(
-        "Report email sent | from=%s | to=%s | name=%s", email_from, recipient_email, full_name
-    )
+    logger.info("Report email sent via Resend | to=%s | name=%s", recipient_email, full_name)
