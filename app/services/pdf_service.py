@@ -44,7 +44,7 @@ def _build_template_context(lead: LeadData, scores: ScoreResult) -> dict:
     ]
 
     return {
-        "generated_at": generated_at,
+        "generated_at": generated_at.strftime("%B %d, %Y"),
         "logo_path": _logo_path(),
         "lead": {
             "name": f"{lead.firstName} {lead.lastName}",
