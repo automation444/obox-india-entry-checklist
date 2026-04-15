@@ -33,18 +33,12 @@ def send_report_email(recipient_email: str, first_name: str, full_name: str, pdf
       </p>
       <p>Our advisory team will also review your assessment and share tailored solutions based on your current stage of expansion.</p>
       <br/>
-      <p>Best regards,<br/></p>
-      <table cellpadding=0 cellspacing=0 width=100% style="border-collapse:collapse;width:100%;">
-        <tr><td height=0 style="height:0;line-height:1%;padding-top:16px;font-size:1px;"></td></tr>
-        <tr><td>
-          <table cellpadding=0 cellspacing=0 width=100% style="border-collapse:collapse;width:100%;color:gray;border-top:1px solid gray;line-height:normal;">
-            <tr><td height=0 style="height:0;padding:9px 8px 0 0;">
-              <p style="color:#888888;text-align:left;font-size:10px;margin:1px;line-height:120%;font-family:Arial">IMPORTANT: The contents of this email and any attachments are confidential. They are intended for the named recipient(s) only. If you have received this email by mistake, please notify the sender immediately and do not disclose the contents to anyone or make copies thereof.</p>
-            </td></tr>
-          </table>
-        </td></tr>
-        <tr><td height=0 style="height:0;line-height:1%;padding-top:16px;font-size:1px;"></td></tr>
-      </table>
+      <p>Thanks & Regards,<br/></p>
+      <p>Mahesh Yadav - India Expansion Head
+      <p>+91 773 819 1983 / +91 956 956 0000</p>
+      <p>OBOX HR Solutions | www.oboxhr.com</p>
+      <p>MUMBAI | BANGALORE | HYDERABAD | CHENNAI | DELHI</p>
+
     </body></html>
     """
 
