@@ -34,10 +34,7 @@ def send_report_email(recipient_email: str, first_name: str, full_name: str, pdf
       <p>Our advisory team will also review your assessment and share tailored solutions based on your current stage of expansion.</p>
       <br/>
       <p>Thanks & Regards,<br/></p>
-      <p>Mahesh Yadav - India Expansion Head
-      <p>+91 773 819 1983 / +91 956 956 0000</p>
-      <p>OBOX HR Solutions | www.oboxhr.com</p>
-      <p>MUMBAI | BANGALORE | HYDERABAD | CHENNAI | DELHI</p>
+      <p>Mahesh Yadav - India Expansion Head<br>+91 773 819 1983 / +91 956 956 0000<br>OBOX HR Solutions | www.oboxhr.com<br>MUMBAI | BANGALORE | HYDERABAD | CHENNAI | DELHI</p>
 
     </body></html>
     """
