@@ -51,7 +51,7 @@ def send_report_email(recipient_email: str, first_name: str, full_name: str, pdf
     resend.Emails.send({
         "from": f"{from_name} <{email_from}>",
         "to": [recipient_email],
-        "subject": f"{first_name}, Your India HR Readiness Report",
+        "subject": f"{first_name}, Your India Readiness Report",
         "html": body_html,
     })
 
