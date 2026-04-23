@@ -99,6 +99,14 @@ def _process_submission(payload: SubmitRequest) -> None:
             pdf_url=pdf_url,
         )
 
+        email_service.send_notification_email(
+            full_name=f"{lead.firstName} {lead.lastName}",
+            email=lead.email,
+            company=lead.company,
+            expansion_stage=lead.expansionStage,
+            overall_score=scores.overall,
+        )
+
         logger.info("Submission fully processed for %s %s <%s>", lead.firstName, lead.lastName, lead.email)
 
     except Exception as exc:

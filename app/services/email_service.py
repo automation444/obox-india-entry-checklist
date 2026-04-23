@@ -47,3 +47,35 @@ def send_report_email(recipient_email: str, first_name: str, full_name: str, pdf
     })
 
     logger.info("Report email sent via Resend | to=%s | name=%s", recipient_email, full_name)
+
+
+def send_notification_email(full_name: str, email: str, company: str, expansion_stage: str, overall_score: int) -> None:
+    resend.api_key = os.getenv("RESEND_API_KEY", "")
+    if not resend.api_key:
+        raise RuntimeError("RESEND_API_KEY env var not set")
+
+    email_from = os.getenv("EMAIL_FROM", "automation@oboxhr.com")
+    from_name  = os.getenv("EMAIL_FROM_NAME", "OBOX HR")
+    notify_to  = os.getenv("NOTIFICATION_EMAIL", "mahesh@oboxhr.com")
+
+    body_html = f"""
+    <html><body>
+      <p>A new India HR Readiness Assessment has been submitted.</p>
+      <table style="border-collapse:collapse;margin-top:12px;">
+        <tr><td style="padding:6px 16px 6px 0;font-weight:bold;">Name</td><td>{full_name}</td></tr>
+        <tr><td style="padding:6px 16px 6px 0;font-weight:bold;">Email</td><td>{email}</td></tr>
+        <tr><td style="padding:6px 16px 6px 0;font-weight:bold;">Company</td><td>{company}</td></tr>
+        <tr><td style="padding:6px 16px 6px 0;font-weight:bold;">Expansion Stage</td><td>{expansion_stage}</td></tr>
+        <tr><td style="padding:6px 16px 6px 0;font-weight:bold;">Overall Score</td><td>{overall_score}%</td></tr>
+      </table>
+    </body></html>
+    """
+
+    resend.Emails.send({
+        "from": f"{from_name} <{email_from}>",
+        "to": [notify_to],
+        "subject": f"New Assessment Submission — {full_name} ({company})",
+        "html": body_html,
+    })
+
+    logger.info("Notification email sent | lead=%s <%s>", full_name, email)
